@@ -2496,10 +2496,14 @@ pause
    ./install.sh
    ```
 
-3. Use the AWS profile:
+3. Run Claude Code:
    ```bash
-   export AWS_PROFILE={profile_name}
-   claude
+   AWS_PROFILE={profile_name} claude
+   ```
+
+   **Tip:** Add an alias to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) for convenience:
+   ```bash
+   alias claude="AWS_PROFILE={profile_name} claude"
    ```
 """
 
@@ -2552,9 +2556,8 @@ The installer will:
 - Apply CoWork registry settings (if included)
 
 
-#### Step 4: Use Claude Code
+#### Step 4: Run Claude Code
 ```cmd
-# Set the AWS profile
 set AWS_PROFILE={profile_name}
 
 # Run Claude Code (authentication opens your browser on first use)
@@ -2566,6 +2569,12 @@ For PowerShell users:
 $env:AWS_PROFILE = "{profile_name}"
 claude
 ```
+
+**Tip:** Create a shortcut by adding a doskey macro or PowerShell alias:
+```powershell
+# PowerShell profile (~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1)
+function claude {{ $env:AWS_PROFILE = "{profile_name}"; claude.exe @args }}
+```
 """
 
         readme_content += f"""
@@ -2575,9 +2584,12 @@ claude
 - Configures an AWS named profile in `~/.aws/config` (or `%USERPROFILE%\\.aws\\config`) that points at the bundled `credential-process` binary
 - Sets up automatic credential refresh via your browser
 
-## Requirements
+## Prerequisites
 
-- Claude Code CLI (`claude`)
+- **Claude Code** installed for your platform (this package doesn't provide the Claude Code binary)
+- Python 3.8 or later
+- AWS CLI v2
+- pip3
 
 ## Troubleshooting
 """
